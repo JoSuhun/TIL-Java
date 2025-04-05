@@ -1,27 +1,24 @@
 import java.util.*;
 
 class Solution {
-    // https://school.programmers.co.kr/learn/courses/30/lessons/178871?language=java
-    // Lv.1 달리기경주
+    // https://school.programmers.co.kr/learn/courses/30/lessons/176963
+    // Lv.1 추억 점수
     // HashMap
-    public String[] solution(String[] players, String[] callings) {
-        Map<String, Integer> map = new HashMap<>();
+    public int[] solution(String[] name, int[] yearning, String[][] photo) {
+        HashMap<String, Integer> map = new HashMap<>();
 
-        for(int i = 0; i < players.length; i++) {
-            map.put(players[i], i);
+        for (int i = 0; i < name.length; i++) {
+            map.put(name[i], yearning[i]);
         }
 
-        for (String calling : callings) {
-            int idx = map.get(calling);
-            if (idx > 0) {
-                String comp = players[idx-1];
-                players[idx-1] = players[idx];
-                players[idx] = comp;
+        int[] answer = new int[photo.length];
 
-                map.put(calling, idx-1);
-                map.put(comp, idx);
+        for (int i = 0; i < photo.length; i++) {
+            for (int j = 0; j < photo[i].length; j++) {
+                answer[i] += map.getOrDefault(photo[i][j], 0);
             }
         }
-    return players;
+
+        return answer;
     }
 }
